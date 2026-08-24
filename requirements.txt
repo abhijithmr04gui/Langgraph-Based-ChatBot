@@ -2,3 +2,5 @@ streamlit
 langchain-core
 langgraph
 langchain-google-genai
+dotenv
+typing
