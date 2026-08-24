@@ -1,6 +1,7 @@
 import streamlit as st
 from langchain_core.messages import HumanMessage
 from backend import chatbot
+st.title('AI Based Chatbot')
 st.write("Welcome to my Langraph based Smart Chatbot")
 thread_id = 1
 config = {'configurable':{'thread_id':thread_id}}
@@ -29,4 +30,3 @@ if user_input :
     st.session_state['message_history'].append({'role':'assistant','content':ai_message})
     with st.chat_message('assistant'):
         st.text(ai_message)
-
