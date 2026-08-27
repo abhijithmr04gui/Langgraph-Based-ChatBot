@@ -1,6 +1,6 @@
 import streamlit as st
 from langchain_core.messages import HumanMessage
-from backend import chatbot
+from backend_database import chatbot,retrieve_threads
 import uuid  # generate random thread id
 
 
@@ -19,6 +19,7 @@ def reset_chat():
 def add_thread(thread_id):
     if thread_id not in st.session_state['chat_threads']:
         st.session_state['chat_threads'].append(thread_id)
+
 
 def load_convo(thread_id):
     state = chatbot.get_state(
@@ -41,7 +42,7 @@ if 'thread_id' not in st.session_state:
 
 
 if 'chat_threads' not in st.session_state:  # store the old thread ids
-    st.session_state['chat_threads'] = []
+    st.session_state['chat_threads'] = retrieve_threads()
 
 add_thread(st.session_state['thread_id'])  # store when website is refreshed
 
@@ -68,6 +69,7 @@ for thread_id in st.session_state['chat_threads'][::-1]:
                 'role': role,
                 'content': msg.content
             })
+
         st.session_state['message_history'] = temp_messages
 
 # Display current conversation
